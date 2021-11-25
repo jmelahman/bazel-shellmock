@@ -16,3 +16,7 @@ http_archive(
 load("@bazel_bats//:deps.bzl", "bazel_bats_dependencies")
 
 bazel_bats_dependencies()
+
+load("@bazel_shellmock//:deps.bzl", "bats_shellmock_dependencies")
+
+bats_shellmock_dependencies()
