@@ -3,8 +3,23 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 BATS_SHELLMOCK_BUILD="""
 sh_library(
     name = "shellmock",
-    srcs = "src/shellmock.bash"],
+    srcs = ["src/shellmock.bash"],
 )
+
+sh_library(
+    name = "test_helper",
+    srcs = ["test/test_helper.bash"],
+)
+
+sh_library(
+    name = "test_lib",
+    srcs = ["test/shellmock.bats"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":test_helper",
+    ],
+)
+exports_files(glob(["test/**"]))
 """
 
 def bats_shellmock_dependencies(
