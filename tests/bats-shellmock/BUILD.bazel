@@ -1,9 +1,9 @@
-load("@bazel_bats//:rules.bzl", "bats_test")
-
-bats_test(
-    name = "shellmock_test",
-    srcs = ["@bats_shellmock//:test/shellmock.bats"],
-    deps = [
-        "@bats_shellmock//:test_lib",
-    ],
-)
+#load("@bazel_bats//:rules.bzl", "bats_test")
+#
+#bats_test(
+#    name = "shellmock_test",
+#    srcs = ["@bats_shellmock//:test/shellmock.bats"],
+#    deps = [
+#        "@bats_shellmock//:test_lib",
+#    ],
+#)

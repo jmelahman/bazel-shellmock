@@ -28,7 +28,7 @@ sh_library(
 exports_files(glob(["test/**"]))
 """
 
-def bats_shellmock_dependencies(
+def bazel_shellmock_dependencies(
         version = "cd5555d36f65b651343d092de5fb0e6e9aecbfd6",
         sha256 = "7d59efcc2d09e7bc0995499b61f44efcc5a2364d0ed6260410e3d1b38f374cfd"):
     http_archive(
