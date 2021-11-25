@@ -9,6 +9,12 @@ sh_library(
 sh_library(
     name = "test_helper",
     srcs = ["test/test_helper.bash"],
+    visibility = ["//visibility:public"],
+    data = [
+        "@bazel_shellmock_deps//bats-support",
+        "@bazel_shellmock_deps//bats-assert",
+        "@bazel_shellmock_deps//bats-file",
+    ],
 )
 
 sh_library(
