@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-#
-# Copied directly from https://github.com/duanemay/bats-shellmock/blob/master/README.md
 
 # Source the shellmock functions into the shell.
-. '../bazel-bazel-shellmock/external/bats_shellmock/shellmock.bash' > /dev/null 2>&1 || \
-  . 'external/bats_shellmock/shellmock.bash'
+load "external/bats_shellmock/load.bash"
 
 setup() {
   skipIfNot "$BATS_TEST_DESCRIPTION"
@@ -19,17 +16,36 @@ teardown() {
   fi
 }
 
+@test "sample.sh-success" {
+
+    run "${BATS_TEST_DIRNAME}/sample.sh"
+
+    [ "$status" = "0" ]
+
+    # Validate using lines array.
+    [ "${lines[0]}" = "sample found" ]
+
+    # Optionally since this is a single line you can use $output
+    [ "$output" = "sample found" ]
+}
+
 @test "sample.sh-success-partial-mock" {
-  shellmock_expect grep --status 0 --type partial --match '"sample line"'
 
-  run ./sample.sh
+    shellmock_expect grep --status 0 --type partial --match '"sample line"'
 
-  shellmock_dump
+    run "${BATS_TEST_DIRNAME}/sample.sh"
 
-  [ "$status" -eq 0 ]
-  [ "$output" = "sample found" ]
+    shellmock_dump
 
-  shellmock_verify
-  shellmock_verify_times 1
-  shellmock_verify_command 0 'grep-stub "sample line" sample.out'
+    [ "$status" = "0" ]
+
+    # Validate using lines array.
+    [ "${lines[0]}" = "sample found" ]
+
+    # Optionally since this is a single line you can use $output
+    [ "$output" = "sample found" ]
+
+    shellmock_verify
+    shellmock_verify_times 1
+    shellmock_verify_command 0 'grep-stub "sample line" sample.out'
 }

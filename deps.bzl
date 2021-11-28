@@ -3,7 +3,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 BATS_SHELLMOCK_BUILD="""
 sh_library(
     name = "shellmock",
-    srcs = ["shellmock.bash"],
+    srcs = ["load.bash"] + glob(["src/*"]),
     visibility = ["//visibility:public"],
 )
 
@@ -30,14 +30,14 @@ exports_files(glob(["test/**"]))
 """
 
 def bazel_shellmock_dependencies(
-        version = "cd5555d36f65b651343d092de5fb0e6e9aecbfd6",
-        sha256 = "7d59efcc2d09e7bc0995499b61f44efcc5a2364d0ed6260410e3d1b38f374cfd"):
+        version = "e4bf4a07a46a69c19fbc656167b490f62024816f",
+        sha256 = "a22a97db52b59b71fcc9cfb688543b705cc874dc020853b03b68820b0d60c84a"):
     http_archive(
         name = "bats_shellmock",
         build_file_content = BATS_SHELLMOCK_BUILD,
         urls = [
-            "https://github.com/duanemay/bats-shellmock/archive/%s.tar.gz" % version,
+            "https://github.com/jmelahman/bats-shellmock/archive/%s.tar.gz" % version,
         ],
-        strip_prefix = "bats-shellmock-%s/src" % version,
+        strip_prefix = "bats-shellmock-%s" % version,
         sha256 = sha256,
     )
