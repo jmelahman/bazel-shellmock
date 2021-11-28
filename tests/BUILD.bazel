@@ -4,3 +4,17 @@ bats_test(
     name = "hello_world_test",
     srcs = ["hello_world_test.bats"],
 )
+
+sh_binary(
+    name = "sample",
+    srcs = ["sample.sh"],
+)
+
+bats_test(
+    name = "sample_test",
+    srcs = ["sample_test.bats"],
+    deps = [
+        ":sample",
+        "@bats_shellmock//:shellmock",
+    ],
+)
