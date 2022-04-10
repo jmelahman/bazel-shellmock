@@ -30,13 +30,15 @@ exports_files(glob(["test/**"]))
 """
 
 def bazel_shellmock_dependencies(
-        version = "e4bf4a07a46a69c19fbc656167b490f62024816f",
-        sha256 = "a22a97db52b59b71fcc9cfb688543b705cc874dc020853b03b68820b0d60c84a"):
+        version = "4c009bf2461147d9522781d99c4cf2d520e712c2",
+        sha256 = "ca212f2705b683f820134bc737ce0d398c7e9f37be198e15f64d24c72bf4bbc5",
+    ):
+    # Maybe load to allow override.
     http_archive(
         name = "bats_shellmock",
         build_file_content = BATS_SHELLMOCK_BUILD,
         urls = [
-            "https://github.com/jmelahman/bats-shellmock/archive/%s.tar.gz" % version,
+            "https://github.com/duanemay/bats-shellmock/archive/%s.tar.gz" % version,
         ],
         strip_prefix = "bats-shellmock-%s" % version,
         sha256 = sha256,
